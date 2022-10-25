@@ -10,8 +10,8 @@ exports.mailer = async  () => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'cyberkingsid@gmail.com', // generated ethereal user
-      pass: 'lwsqncckpfvujrlk',
+      user: '', // generated ethereal user
+      pass: '',
     },
   });
 
