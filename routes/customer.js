@@ -29,7 +29,7 @@ router.post(
         const user = await Customer.findOne({email: req.body.email})
 
         const body = { _id: user._id, email: user.email };
-                const token = jwt.sign({ user: body }, 'mykey', { expiresIn: '1h' });
+                const token = jwt.sign({ user: body }, 'mykey', { expiresIn: '5d' });
   
                 return res.json({ token, user, message: "Customer successfully Added!" });
 
@@ -50,6 +50,20 @@ router.get(
     }
   );
 
-router.get('/sendMail', sendMailer)
+
+  router.get('/createSession', passport.authenticate('jwt', {failureRedirect: '/profile', session: false}), 
+  
+  (req, res) => {
+
+    if(req.user)
+    return res.json({ user: req.user, message: "Customer successfully Added!" });
+    return res.status(401).json({ message: "Unauthorized!" });
+
+
+  }
+  
+  )
+
+router.post('/sendMail', passport.authenticate('jwt', {failureRedirect: '/profile', session: false}) , sendMailer)
 
 module.exports = router

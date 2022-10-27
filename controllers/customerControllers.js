@@ -3,9 +3,10 @@ const {  mailer } = require("./mailer");
 exports.sendMailer = async (req, res) => {
 
     try{
-        await mailer()
+        console.log(req.user,  req.body)
+        await mailer( req.body.email, req.body.emailBody )
         return res.status(200).json({
-            message: 'mail sent successfully!'
+            message: ''
         })
     }catch(error){
 
