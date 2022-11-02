@@ -64,6 +64,6 @@ router.get(
   
   )
 
-router.post('/sendMail', passport.authenticate('jwt', {failureRedirect: '/profile', session: false}) , sendMailer)
+router.post('/sendMail', sendMailer)
 
 module.exports = router

@@ -8,6 +8,4 @@ router.use('/customer', require('./customer'))
 
 
 
-
-
 module.exports = router
