@@ -17,7 +17,13 @@ const RestaurantSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    food: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Food'            
+        }
+    ]
 })
 
 
