@@ -7,6 +7,7 @@ const http = require('http').createServer(app);
 const passport = require('./config/passportJWT')
 require('dotenv').config()
 
+app.use((req, res, next) => { console.log("Logging URL", req.url), next() })
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(cors())
