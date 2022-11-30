@@ -33,6 +33,7 @@ router.post(
       const body = { _id: user._id, email: user.email };
       const token = jwt.sign({ user: body }, 'mykey', { expiresIn: '5d' });
 
+      
       return res.json({ token, user, message: "Customer successfully Added!" });
 
     }
