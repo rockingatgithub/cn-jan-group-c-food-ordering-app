@@ -21,9 +21,9 @@ router.post(
 
     async (req, res) => {
 
-        console.log(req.body)
+        console.log(req.params)
 
-        const user = await Restaurant.findOne({ email: req.body.email })
+        const user = await Restaurant.findOne({ email: req.body.email }).populate('food')
 
         if (user) {
 

@@ -14,6 +14,18 @@ router.post('/addFood', async (req, res) => {
 
 })
 
+router.get('/getFood', async (req, res) => {
+    console.log(req.query.sort, req.url)
+
+    const food = await Food.find({}).sort({'price' : Number(req.query.sort)}).skip(1).limit(1)
+    return res.status(200).json({
+        food: food
+    })
+
+})
+
+
+
 
 
 module.exports = router
