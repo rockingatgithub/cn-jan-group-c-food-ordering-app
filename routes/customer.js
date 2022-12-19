@@ -1,11 +1,23 @@
 const express = require('express')
-const Customer = require('../models/customer')
 const router = express.Router()
-const passport = require('../config/passportJWT')
 const jwt = require('jsonwebtoken');
+const multer  = require('multer')
 const { sendMailer } = require('../controllers/customerControllers');
-
+const Customer = require('../models/customer')
+const passport = require('../config/passportLocal')
 // ...
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, '/uploads')
+//   },
+//   filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//     cb(null, file.fieldname + '-' + uniqueSuffix)
+//   }
+// })
+
+const upload = multer({ dest: 'uploads/' })
 
 
 router.post('/signup', async (req, res) => {
@@ -56,7 +68,7 @@ router.get(
 );
 
 
-router.get('/createSession', passport.authenticate('jwt', { failureRedirect: '/profile', session: false }),
+router.get('/createSession', passport.authenticate('local', { failureRedirect: '/profile', session: true }),
 
   (req, res) => {
 
@@ -68,6 +80,10 @@ router.get('/createSession', passport.authenticate('jwt', { failureRedirect: '/p
   }
 
 )
+
+router.post('/profile_avatar', upload.single('avatar') ,(req, res) => {
+  console.log(req.file)
+})
 
 router.post('/sendMail', sendMailer)
 

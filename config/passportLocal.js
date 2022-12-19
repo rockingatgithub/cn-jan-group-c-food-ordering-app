@@ -2,34 +2,9 @@ const passport = require('passport');
 const Customer = require('../models/customer');
 const localStrategy = require('passport-local').Strategy;
 
-
-
-// ...
-
-passport.use(
-    'signup',
-    new localStrategy(
-      {
-        usernameField: 'email',
-        passwordField: 'password'
-      },
-      async ( email, password, done) => {
-        try {
-          const user = await Customer.create({ email, password });
-  
-          return done(null, user);
-        } catch (error) {
-          done(error);
-        }
-      }
-    )
-  );
-
-
   // ...
 
 passport.use(
-    'login',
     new localStrategy(
       {
         usernameField: 'email',
@@ -50,6 +25,16 @@ passport.use(
       }
     )
   );
+
+  passport.serializeUser(function(user, done) {
+    console.log("the serilaized user", user)
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    console.log("the serilaized user", user)
+        done(null, user);
+  });
 
 
   module.exports = passport

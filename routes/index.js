@@ -18,11 +18,11 @@ router.get('/google',
 router.get('/google/callback',
     passport.authenticate('google', {
         failureRedirect: '/failed',
-        session: false
     }),
     function (req, res) {
         return res.json({
-            user: req.user
+            user: req.user,
+            navigateTo: '/profile'
         })
 
     }

@@ -14,7 +14,7 @@ router.post('/addFood', async (req, res) => {
 
 })
 
-router.get('/getFood', async (req, res) => {
+router.get('/getFood', passport.authenticate('jwt', {failureRedirect: '/login'})  , async (req, res) => {
     console.log(req.query.sort, req.url)
 
     const food = await Food.find({}).sort({'price' : Number(req.query.sort)}).skip(1).limit(1)

@@ -19,5 +19,15 @@ passport.use(
   )
 );
 
+passport.serializeUser(function(user, done) {
+  console.log("the serilaized user", user)
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  console.log("the serilaized user", user)
+      done(null, user);
+});
+
 module.exports = passport
 
